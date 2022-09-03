@@ -1,0 +1,39 @@
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import Process 1.0
+
+ApplicationWindow {
+    visible: true
+    width: 640
+    height: 480
+    title: "Run a sh file in CMD!"
+
+    Process {
+        id: cmd
+
+        property string output: ""
+
+        onStarted: print("Started")
+        onFinished: print("Closed")
+
+        onErrorOccurred: console.log("Error Ocuured: ", error)
+
+        onReadyReadStandardOutput: {
+            output = cmd.readAll()
+            txt.text += output
+        }
+    }
+
+    Column {
+        anchors.centerIn: parent
+        TextArea {
+            id: txt
+            text: ""
+        }
+
+        Button {
+            text: "Run!"
+            onClicked: cmd.start("/home/foxoman/file.sh")
+        }
+    }
+}
