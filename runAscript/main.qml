@@ -50,24 +50,24 @@ ApplicationWindow {
                         width: parent.width
                         height: parent.height
                         anchors.fill: parent
-                        function append(strAdd)
+                        function append()
                         {
-                            txt.text = txt.text + strAdd
-                            txt.cursorPosition = txt.length-1
+                            //txt.text = txt.text + strAdd
+                            txt.cursorPosition = txt.length-10
                         }
                     }
                 }
 
                Timer {
                     running: true
-                    interval: 1000
+                    interval: 50
                     repeat: true
                     property int iteration: 0
 
                     onTriggered:{
                         if(str=="doi"){
-                        txt.append("\n")
-                        txt.append("\n")
+                        txt.append()
+                        txt.append()
                         }
                      }
                 }
@@ -79,7 +79,7 @@ ApplicationWindow {
             text: "Run!"
             onClicked: {
                 str="doi"
-                cmd.start("scripts/install_akt_ota-cli.sh",["-a"])
+                cmd.start("/home/dragos/Desktop/GitHub/ota-gui/install_akt_ota-cli.sh",["-a"])
             }
         }
     }
